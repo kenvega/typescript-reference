@@ -1,0 +1,116 @@
+source:
+  https://frontendmasters.com/courses/typescript-v3/
+  https://github.com/mike-north/ts-fundamentals-v3
+  https://www.typescript-training.com/course/fundamentals-v3
+
+why devs care about types
+  more intent
+    your functions can be interpreted in another ways
+      function add(a, b) {
+        return a + b
+      }
+
+    could be used to concatenate strings, but this other function 
+      function add(a: number, b: number): number {
+        return a + b
+      }
+
+    gives even more context on what it does
+
+  errors from runtime to compile time
+    refactors where you forgot to change something
+    parameters required you forgot to add
+
+  autocompletion (?)
+
+setup
+  package.json - dependencies and scripts
+    {
+      "name": "hello-ts",
+      "license": "NOLICENSE",
+      "devDependencies": {
+        "typescript": "^4.3.2"
+      },
+      "scripts": {
+        "dev": "tsc --watch --preserveWatchOutput" // like nodemon
+      }
+    }
+
+  tsconfig.json - options we pass to the compiler
+    {
+      "compilerOptions": {
+        "outDir": "dist", // where to put output of compiled files. best is in other folder
+        "target": "ES3" // which level of JS support to target
+      },
+      "include": ["src"] // where we find our files to compile 
+    }
+
+    this can be also set in the cli command as options (like docker for example)
+
+  src/index.ts - your program 
+
+compiling
+  the .d.ts file is where the typescript declarations are outside of your js files
+  this way you can still separate ts from js if you don't use ts
+
+  if you need to run with node just use commonjs in your module config options
+
+variables and values
+
+  typescript infers types
+
+  in typscript variables are born with their types.. they don't change once set in declaration
+    you can change them, but only in declaration
+
+  typescript always try to make the most specific assumption that it can without getting in your way
+
+    using const in typescript creates a specific type like `number 6` becuase it can't be reassigned nor changed in value
+      6 is inmutable in javascript (you can create new numbers but never change values of old ones)
+      this is called literal types
+
+    using let can be reassigned so it will only be specific in the type (e.g. number)
+      because if you declared with let you probably will reassign the value
+
+  enforcement in types
+    useful when a variable is going to get its value later in the execution
+
+  do you want problems to be found where you declare your functions or where you use your functions?
+    teacher recommends first one so you guarantee your calls needs a return
+      here is the example
+        problems in execution   - https://cln.sh/MfuS3N
+        problems in declaration - https://cln.sh/rGPsYq
+
+  typescript is not a replacement for unit tests, because behavior is still part of javascript
+    typescript checks the types, it doesn't check if your sum function actually sums your values
+
+  types `any` are dangerous because it not only causes problems with itself
+    but when mixed with well typed code, the flexibility of any compromise the well typed code
+      becuase any can hold anything and masquerade as anything
+
+collections - arrays, objects, tuples
+
+  object types
+    object type example
+      let car: {
+        make: string
+        model: string
+        year: number
+      }
+
+    can be used as a parameter too (will give you autocompletion)
+      function printCar(car: {
+        make: string
+        model: string
+        year: number
+      }) {
+        console.log(`${car.make} ${car.model} (${car.year})`)
+      }
+
+    optional parameters
+      they just need an `?` at the end of the key name
+        car: {
+          make: string
+          model: string
+          year: number
+          chargeVoltage?: number
+        }

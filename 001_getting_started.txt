@@ -1,0 +1,125 @@
+source: https://www.youtube.com/watch?v=NjN00cM18Z4
+
+what's typescript?
+  a superset of javascript
+
+what's a superset?
+  (?)
+
+characteristics about typescript
+  typing is optional but it's what makes the apps more predictable and easier to debug
+
+  it brings object-oriented features like Interfaces, Constructors, access modifiers, etc
+
+  you get a more intelligent editor
+
+  any valid javascript code is valid typescript
+
+  typescript needs to be transpiled to javascript to work in browsers
+
+how to install typescript?
+  npm install typescript
+  (tutorial recommends installing globally)
+
+how to transpile your code?
+  <path/your/bin>tsc <path/your/typescript/file>.ts
+
+  e.g.
+  node_modules/typescript/bin/tsc 001_getting_started/001_main.ts
+
+  if installed globally you should be able to have tsc command in your path
+
+  it will generate 001_main.js file that you could run with node
+
+compilation characteristics about typescript
+  when transpiling, it will tell you about errors but it will still generate the js files from the ts files
+
+  it will tell you if you change the data type of a variable because that can lead to bugs
+
+Type annotations
+
+  number: includes integers and floating point numbers
+
+  let a: number
+  let b: boolean;
+  let c: string
+  let d: any;
+  let e: number [] = [1, 2, 3]
+  let f: any [] = [1, true, 'a', false];
+
+  there is enum type annotation that give us intellisense
+
+  you can use type assertion to tell the compiler that your variable has a specific type, this will trigger the intellisense but will not actually change your data type of your variable
+
+
+
+Arrow functions
+
+Interfaces
+
+  these are used to reuse annotations of complex objects that you might have
+
+  so this more verbose annotation in the function
+    let drawPoint = (point: { X: number, y: number }) => {
+      // ...
+    }
+
+    drawPoint({
+      x: 1,
+      y: 2
+    })
+
+  can use a cleaner annotation that can be reused in other functions
+
+    interface Point {
+      x: number,
+      y: number
+    }
+
+    let drawPoint = (point: Point) => {
+      // ...
+    }
+
+    drawPoint({
+      X: 1,
+      y: 2
+    })
+
+
+
+Classes
+
+  classes are created to group the interface with its related functions
+  then the idea would be to create instances that have access to these functions and properties (coming previously from the interface)
+
+
+
+Constructors
+
+  constructors can have optional parameters with the syntax ?:
+  this is allow classes to be instanced without knowing all of the initial values
+  this optional parameter exist as an alternative to have multiple constructor functions like in C# or Java
+
+  e.g.
+  class Point {
+    x: number;
+    y: number;
+
+    constructor (x?: number, y?: number) {
+      this.x = x;
+      this.y = y;
+    }
+
+    draw() {
+      console. log ('X: + this.x +', Y:' + this.y);
+    }
+  }
+
+
+Access modifiers
+
+  37:20 on https://www.youtube.com/watch?v=NjN00cM18Z4
+
+Properties
+
+Modules
